@@ -1,0 +1,9 @@
+- hosts: all
+  become: true
+  roles:
+   - role: commons
+
+- hosts: DHCP
+  become: true
+  roles:
+   - role: dhcp

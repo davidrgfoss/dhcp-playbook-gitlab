@@ -1,0 +1,18 @@
+source-directory /etc/network/interfaces.d
+
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet dhcp
+
+{% for f in Networks %}
+auto {{Networks[f].Interfaz}}
+iface {{Networks[f].Interfaz}} inet static
+	address {{Networks[f].IP}}
+	netmask {{Networks[f].subred}}
+{% endfor %}
+
+{% for x in Networks -%}
+up iptables -t nat -A POSTROUTING -o eth0 -s {{Networks[x].Origen}} -j MASQUERADE
+{% endfor %}

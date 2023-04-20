@@ -1,0 +1,2 @@
+- name: Actualizar GRUB
+  ansible.builtin.shell: update-grub2

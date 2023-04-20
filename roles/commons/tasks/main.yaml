@@ -1,0 +1,17 @@
+- name: Actualizamos Paquetes
+  apt: update_cache=yes upgrade=yes
+
+- name: Instalar Paquetes
+  apt:
+    pkg: 
+      - resolvconf
+
+- name: Configurar Grub
+  ansible.builtin.copy:
+    src: grub
+    dest: /etc/default/grub
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - Actualizar GRUB
